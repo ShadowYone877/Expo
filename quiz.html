@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+    <meta name="description" content="Quiz relámpago de seguridad web: 10 preguntas de vulnerabilidades y programación segura.">
+    <title>Quiz Seguridad Web · Tópicos Selectos de Programación Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=1.6">
+</head>
+<body class="quiz-page">
+
+    <!-- Barra de progreso global -->
+    <div class="progress-bar" aria-hidden="true">
+        <div class="progress-bar__fill" id="quizProgress"></div>
+    </div>
+
+    <header class="topbar">
+        <span class="topbar__brand"><span class="dot-live"></span> Seguridad Web · Quiz</span>
+        <a class="topbar__link" href="index.html">← Presentación</a>
+    </header>
+
+    <main class="quiz">
+
+        <!-- ═════════ PANTALLA DE INICIO ═════════ -->
+        <section class="quiz-screen" id="screenStart">
+            <p class="kicker">Actividad recreativa</p>
+            <h1 class="quiz-title">Quiz <span class="text-gradient">relámpago</span></h1>
+            <p class="quiz-sub">
+                Puntúa en 10 preguntas lo que vimos en las diapositivas 4.2 y 4.3:
+                <strong>¿vulnerable o seguro?</strong> y conceptos clave.
+            </p>
+
+            <div class="quiz-meta">
+                <span class="tag">10 preguntas</span>
+                <span class="tag">1 punto c/u</span>
+                <span class="tag">5 código · 5 teoría</span>
+            </div>
+
+            <ul class="quiz-rules">
+                <li><span class="quiz-rules__n">1</span> Lee el código o la pregunta y elige tu respuesta.</li>
+                <li><span class="quiz-rules__n">2</span> Obtendrás retroalimentación al instante con la explicación.</li>
+                <li><span class="quiz-rules__n">3</span> Al terminar verás tu puntaje y la revisión completa.</li>
+            </ul>
+
+            <button class="quiz-btn quiz-btn--primary" id="startBtn" type="button">Comenzar →</button>
+            <p class="hint">Tip: también puedes usar las teclas <kbd>1</kbd>–<kbd>4</kbd> y <kbd>Enter</kbd></p>
+        </section>
+
+        <!-- ═════════ PANTALLA DE JUEGO ═════════ -->
+        <section class="quiz-screen" id="screenPlay" hidden>
+            <div class="quiz-hud">
+                <span id="quizCounter">Pregunta 1 / 10</span>
+                <span class="quiz-score" id="quizScore">Puntos 0</span>
+            </div>
+
+            <article class="quiz-card">
+                <span class="quiz-chip" id="quizChip">Opción múltiple</span>
+                <h2 class="quiz-question" id="quizQuestion">Cargando…</h2>
+                <pre class="code quiz-code" id="quizCode" hidden></pre>
+
+                <div class="quiz-options" id="quizOptions" role="group" aria-label="Opciones de respuesta"></div>
+
+                <p class="quiz-feedback" id="quizFeedback" aria-live="polite" hidden></p>
+            </article>
+
+            <button class="quiz-btn quiz-btn--primary quiz-next" id="nextBtn" type="button" hidden>Siguiente →</button>
+        </section>
+
+        <!-- ═════════ PANTALLA DE RESULTADO ═════════ -->
+        <section class="quiz-screen" id="screenEnd" hidden>
+            <p class="kicker kicker--ok">Resultado</p>
+            <h1 class="quiz-title" id="endTitle">¡Terminaste!</h1>
+
+            <div class="quiz-ring" id="quizRing">
+                <div class="quiz-ring__inner">
+                    <strong id="endScore">0/10</strong>
+                    <span id="endPct">0%</span>
+                </div>
+            </div>
+
+            <p class="quiz-sub" id="endMsg"></p>
+
+            <div class="quiz-review" id="quizReview"></div>
+
+            <div class="quiz-actions">
+                <button class="quiz-btn quiz-btn--primary" id="retryBtn" type="button">Reintentar</button>
+                <a class="quiz-btn quiz-btn--ghost" href="index.html">Ver presentación</a>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="quiz.js?v=1.0"></script>
+</body>
+</html>
