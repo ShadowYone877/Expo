@@ -139,6 +139,7 @@ body::before {
     z-index: 1;
     height: 100vh;
     width: 100%;
+    overflow: hidden;   /* recorta los transforms de salida: evita scroll horizontal fantasma */
 }
 
 .slide {
@@ -275,6 +276,20 @@ kbd {
 }
 .grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+/* Hijos de grid encogibles: sin esto, los bloques <pre> (white-space: pre)
+   empujan la tarjeta más allá del viewport y el texto queda cortado.
+   Con min-width:0 el código hace scroll horizontal DENTRO de su bloque. */
+.grid > *,
+.authors__grid > *,
+.compare > *,
+.slide__inner,
+.card,
+.mini,
+.threats li {
+    min-width: 0;
+    max-width: 100%;
+}
 
 .card {
     background: linear-gradient(150deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
@@ -481,7 +496,9 @@ kbd {
     border-left: 3px solid var(--cyan);
     border-radius: var(--radius-sm);
     padding: 14px 16px;
+    max-width: 100%;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;   /* scroll suave en iOS */
     color: #cfe0ff;
     white-space: pre;
     tab-size: 2;
@@ -737,25 +754,82 @@ kbd {
     .grid--2, .grid--3 { grid-template-columns: 1fr; }
     .authors__grid { grid-template-columns: 1fr; gap: 11px; }
     .compare { grid-template-columns: 1fr; }
+    .keypoints { grid-template-columns: 1fr; }
+
+    /* Vertical / móvil: más aire arriba y espacio libre abajo
+       para que la barra de control no tape el contenido */
     .slide {
         align-items: flex-start;
-        padding-top: 76px;
-        padding-bottom: 96px;
+        padding-top: 72px;
+        padding-bottom: 108px;
     }
+    .kicker { margin-bottom: 12px; }
+    .slide-title { font-size: clamp(1.45rem, 6.2vw, 2.1rem); margin-bottom: 14px; }
+    .grid { gap: 14px; }
+    .card { padding: 15px 14px; }
+    .card__title { margin-bottom: 10px; font-size: 0.98rem; }
+    .list, .steps { gap: 8px; }
+    .list li, .steps li, .text { font-size: 0.9rem; }
+    .callout { margin-top: 12px; padding: 12px 14px; font-size: 0.87rem; }
+    /* Código: tamaño reducido y ajuste de línea (nada oculto en móvil) */
+    .code {
+        font-size: 0.7rem;
+        line-height: 1.6;
+        padding: 11px 12px;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+    }
+    .topbar { padding: 12px 18px; justify-content: flex-end; }
     .topbar__brand { display: none; }
-    .topbar { justify-content: flex-end; }
-    .hero-title { font-size: clamp(2.4rem, 12vw, 3.6rem); }
     .owasp-strip { display: none; }
+
+    /* Tabla de cabeceras: ancho fijo y salto de palabra para que no desborde */
+    .headers-table { table-layout: fixed; }
+    .headers-table th, .headers-table td { overflow-wrap: anywhere; }
+
+    /* Portada compacta en vertical */
+    .hero-title { font-size: clamp(2.1rem, 10.5vw, 3.1rem); margin: 6px 0 12px; }
+    .hero-sub { margin-bottom: 18px; line-height: 1.5; }
+    .hero-tags { margin-bottom: 20px; gap: 8px; }
+    .authors__label { margin-bottom: 10px; }
+    .authors__grid { gap: 10px; }
+    .authors__grid .author-card { padding: 11px 14px; gap: 12px; }
+    .author-card__avatar { width: 42px; height: 42px; }
+    .hint { margin-top: 18px; }
+
+    /* Tarjeta de conclusiones alineada a la izquierda en vertical */
+    .card--mini { text-align: left; }
+    .card__icon { margin-bottom: 6px; }
 }
 
 @media (max-width: 560px) {
-    .controls { gap: 10px; padding: 7px 11px; }
-    .ctrl-btn { width: 38px; height: 38px; }
+    /* La barra de control pasa a ser un dock inferior de ancho completo:
+       no flota sobre el contenido y respeta el área segura del teléfono */
+    .controls {
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transform: none;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+        justify-content: center;
+        gap: 26px;
+        padding: 9px 14px calc(9px + env(safe-area-inset-bottom, 0px));
+        background: rgba(9, 16, 38, 0.96);
+    }
+    .slide { padding-bottom: 116px; }
+
+    .ctrl-btn { width: 44px; height: 44px; }   /* mínimo cómodo para el dedo */
     /* En pantallas muy angostas se ocultan los puntos (el contador superior
        y la barra de progreso comunican la posición; evita targets diminutos) */
     .dots { display: none; }
-    .author-card { padding: 13px 16px; }
-    .headers-table td.mono { font-size: 0.72rem; }
+    .author-card { padding: 13px 15px; }
+    .authors__grid .author-card { padding: 12px 14px; }
+    .headers-table td.mono { font-size: 0.7rem; }
+    .hero-sub { font-size: 0.98rem; }
+    .text, .list li, .steps li { font-size: 0.9rem; }
 }
 
 /* Impresión / exportar a PDF: una diapositiva por página */
